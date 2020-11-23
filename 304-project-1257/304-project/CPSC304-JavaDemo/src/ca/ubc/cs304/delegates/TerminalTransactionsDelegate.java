@@ -21,7 +21,7 @@ public interface TerminalTransactionsDelegate {
 	public void insertPicture(PictureModel model);
 	public void showPicture();
 	public void updatePictureDirector(String title, Date releaseDate, String director);
-    public void selectUsersFavGenreHorror();
+    public void selectUsersFavGenre(String favGenre);
     public void projectPictureSeriesID();
 	
 	public void terminalTransactionsFinished();

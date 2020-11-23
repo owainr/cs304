@@ -85,8 +85,8 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
 	 * Displays information about varies bank branches.
 	 */
 
-    public void selectUsersFavGenreHorror() {
-        UserModel[] models = dbHandler.selectUsersFavGenreHorror();
+    public void selectUsersFavGenre(String favGenre) {
+        UserModel[] models = dbHandler.selectUsersFavGenre(favGenre);
 
         for (int i = 0; i < models.length; i++) {
             UserModel model = models[i];
