@@ -146,7 +146,7 @@ public class DatabaseConnectionHandler {
         }
     }
 
-    public UserModel[] selectUserFavGenre(String favGenre) {
+    public UserModel[] selectUsersFavGenre(String favGenre) {
         ArrayList<UserModel> result = new ArrayList<UserModel>();
 
         try {
@@ -181,6 +181,49 @@ public class DatabaseConnectionHandler {
         }
 
         return result.toArray(new UserModel[result.size()]);
+    }
+
+    public UserModel[] allUsersThatWatchedMovie(String title, Date releaseDate) {
+        ArrayList<UserModel> result = new ArrayList<UserModel>();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT * FROM user u, userWatches uw" +
+                    " WHERE u.username = uw.username AND " +
+                    "u.email = uw.email AND" +
+                    "uw.title = ? AND" +
+                    "uw.releaseDate = ?");
+            ps.setString(1, title);
+            ps.setDate(2, releaseDate);
+            ResultSet rs = ps.executeQuery();
+
+//    		// get info on ResultSet
+//    		ResultSetMetaData rsmd = rs.getMetaData();
+//
+//    		System.out.println(" ");
+//
+//    		// display column names;
+//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
+//    			// get column name and print it
+//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+//    		}
+
+            while(rs.next()) {
+                UserModel model = new UserModel(rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("favGenreCategory"),
+                        rs.getInt("watchlistID"),
+                        rs.getInt("historyID"));
+                result.add(model);
+            }
+
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new UserModel[result.size()]);
+
     }
 
     public boolean login(String username, String password) {
@@ -288,12 +331,12 @@ public class DatabaseConnectionHandler {
         }
     }
 
-    public UserModel[] projectPictureSeriesID() {
-        ArrayList<UserModel> result = new ArrayList<UserModel>();
+    public String[] projectPictureSeriesID() {
+        ArrayList<String> result = new ArrayList<>();
 
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT seriesID FROM user");
+            ResultSet rs = stmt.executeQuery("SELECT seriesID FROM picture");
 
 //    		// get info on ResultSet
 //    		ResultSetMetaData rsmd = rs.getMetaData();
@@ -307,12 +350,7 @@ public class DatabaseConnectionHandler {
 //    		}
 
             while(rs.next()) {
-                UserModel model = new UserModel(rs.getString("username"),
-                        rs.getString("email"),
-                        rs.getString("favGenreCategory"),
-                        rs.getInt("watchlistID"),
-                        rs.getInt("historyID"));
-                result.add(model);
+                result.add(rs.getString("seriesID"));
             }
 
             rs.close();
@@ -321,7 +359,7 @@ public class DatabaseConnectionHandler {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
 
-        return result.toArray(new UserModel[result.size()]);
+        return result.toArray(new String[result.size()]);
 
     }
 }
