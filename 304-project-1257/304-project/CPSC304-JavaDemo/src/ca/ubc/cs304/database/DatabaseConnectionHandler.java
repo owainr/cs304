@@ -146,7 +146,7 @@ public class DatabaseConnectionHandler {
         }
     }
 
-    public UserModel[] selectUsersFavGenre(String favGenre) {
+    public UserModel[] selectUserFavGenre(String favGenre) {
         ArrayList<UserModel> result = new ArrayList<UserModel>();
 
         try {

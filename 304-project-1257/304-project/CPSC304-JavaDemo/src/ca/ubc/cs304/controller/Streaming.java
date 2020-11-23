@@ -86,7 +86,7 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
 	 */
 
     public void selectUsersFavGenre(String favGenre) {
-        UserModel[] models = dbHandler.selectUsersFavGenre(favGenre);
+        UserModel[] models = dbHandler.selectUserFavGenre(favGenre);
 
         for (int i = 0; i < models.length; i++) {
             UserModel model = models[i];
