@@ -6,7 +6,7 @@ import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
 import ca.ubc.cs304.model.PictureModel;
 import ca.ubc.cs304.model.UserModel;
 import ca.ubc.cs304.ui.LoginWindow;
-import ca.ubc.cs304.ui.TerminalTransactions;
+import ca.ubc.cs304.ui.GUI;
 
 import java.sql.Date;
 /**
@@ -37,7 +37,7 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
 			// Once connected, remove login window and start text transaction flow
 			loginWindow.dispose();
 
-			TerminalTransactions transaction = new TerminalTransactions();
+			GUI transaction = new GUI();
 			transaction.setupDatabase(this);
 			transaction.showMainMenu(this);
 		} else {

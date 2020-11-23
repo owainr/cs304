@@ -7,7 +7,7 @@ import ca.ubc.cs304.model.PictureModel;
 import ca.ubc.cs304.model.UserModel;
 
 import javax.jws.soap.SOAPBinding;
-//test!!!!
+
 /**
  * This class handles all database related transactions
  * TODO: join
