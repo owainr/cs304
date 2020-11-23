@@ -36,6 +36,22 @@ public class GUI extends JFrame implements ActionListener {
 	Font regularFont;
 	Font italicFont;
 
+	//Account Creator Fields
+
+	//User addition fields
+
+	//Genre addition fields
+
+	//Series creator fields
+
+	//Director creator fields
+
+	//Picture creator fields
+
+	//Add picture to watchlist fields
+
+	//Add picture to history fields
+
 
 
 	/*
@@ -45,10 +61,10 @@ public class GUI extends JFrame implements ActionListener {
 	 		- Create a Picture
 	 			- Different if it's a movie vs TV show
 	 			- director, genre, and series should all be selectable from those which already exist
-	 		- Create an account
-	 		- Add a user to an account
-	 		- Create a series
-	 		- Create a genre
+	 		- Create an account !
+	 		- Add a user to an account !
+	 		- Create a series !
+	 		- Create a genre !
 	 		- Add a picture to a user's watchlist
 	 		- Submit a picture that a user has watched
 	 			- Add it to their history
