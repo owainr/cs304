@@ -3,6 +3,7 @@ package ca.ubc.cs304.database;
 import java.sql.*;
 import java.util.ArrayList;
 
+import ca.ubc.cs304.model.GenreAvgLengthModel;
 import ca.ubc.cs304.model.PictureModel;
 import ca.ubc.cs304.model.UserModel;
 
@@ -225,6 +226,42 @@ public class DatabaseConnectionHandler {
         return result.toArray(new UserModel[result.size()]);
 
     }
+
+    public GenreAvgLengthModel[] avgLengthByGenre() {
+        ArrayList<GenreAvgLengthModel> result = new ArrayList<GenreAvgLengthModel>();
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT genre, AVG(length) FROM picture GROUP BY genre");
+
+//    		// get info on ResultSet
+//    		ResultSetMetaData rsmd = rs.getMetaData();
+//
+//    		System.out.println(" ");
+//
+//    		// display column names;
+//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
+//    			// get column name and print it
+//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+//    		}
+
+            while(rs.next()) {
+                GenreAvgLengthModel model = new GenreAvgLengthModel(rs.getString("genre"),
+                        rs.getInt("length"));
+                result.add(model);
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new GenreAvgLengthModel[result.size()]);
+
+    }
+
+
 
     public boolean login(String username, String password) {
         try {

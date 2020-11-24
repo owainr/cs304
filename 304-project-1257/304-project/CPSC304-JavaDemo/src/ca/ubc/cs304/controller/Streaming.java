@@ -3,6 +3,7 @@ package ca.ubc.cs304.controller;
 import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.delegates.LoginWindowDelegate;
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
+import ca.ubc.cs304.model.GenreAvgLengthModel;
 import ca.ubc.cs304.model.PictureModel;
 import ca.ubc.cs304.model.UserModel;
 import ca.ubc.cs304.ui.LoginWindow;
@@ -148,6 +149,21 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
 
     }
 
+    public void avgLengthByGenre() {
+
+        GenreAvgLengthModel[] models = dbHandler.avgLengthByGenre();
+
+        for (int i = 0; i < models.length; i++) {
+            GenreAvgLengthModel model = models[i];
+
+            // simplified output formatting; truncation may occur
+            System.out.printf("%-10.10s", model.getGenre());
+            System.out.printf("%-20.20s", model.getAvgLength());
+
+            System.out.println();
+        }
+
+    }
 
     public void showPicture() {
         PictureModel[] models = dbHandler.getPictureInfo();

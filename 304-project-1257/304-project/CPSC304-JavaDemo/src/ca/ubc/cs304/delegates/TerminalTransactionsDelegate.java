@@ -24,6 +24,7 @@ public interface TerminalTransactionsDelegate {
     public void selectUsersFavGenre(String favGenre);
     public void projectPictureSeriesID();
     public void allUsersThatWatchedMovie(String title, Date releaseDate);
+    public void avgLengthByGenre();
 
     public void terminalTransactionsFinished();
 }
