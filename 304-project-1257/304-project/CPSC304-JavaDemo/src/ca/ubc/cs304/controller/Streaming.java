@@ -89,7 +89,7 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
      * Displays information about varies bank branches.
      */
 
-    public void selectUsersFavGenre(String favGenre) {
+    public UserModel[] selectUsersFavGenre(String favGenre) {
         UserModel[] models = dbHandler.selectUsersFavGenre(favGenre);
 
         for (int i = 0; i < models.length; i++) {
@@ -112,18 +112,20 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
 
             System.out.println();
         }
+        return models;
 
     }
 
-    public void projectPictureSeriesID() {
+    public String[] projectPictureSeriesID() {
         String[] models = dbHandler.projectPictureSeriesID();
 
         for (int i = 0; i < models.length; i++) {
             System.out.println(models[i]);
         }
+        return models;
     }
 
-    public void allUsersThatWatchedAPicture(String title, Date releaseDate) {
+    public UserModel[] allUsersThatWatchedAPicture(String title, Date releaseDate) {
         UserModel[] models = dbHandler.allUsersThatWatchedAPicture(title,releaseDate);
 
         for (int i = 0; i < models.length; i++) {
@@ -146,11 +148,11 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
 
             System.out.println();
         }
-
+        return models;
 
     }
 
-    public void avgLengthByGenre() {
+    public GenreAvgLengthModel[] avgLengthByGenre() {
 
         GenreAvgLengthModel[] models = dbHandler.avgLengthByGenre();
 
@@ -163,10 +165,11 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
 
             System.out.println();
         }
+        return models;
 
     }
 
-    public void numPicturesByGenreOver(int cutoff) {
+    public GenreCountModel[] numPicturesByGenreOver(int cutoff) {
 
         GenreCountModel[] models = dbHandler.numPicturesByGenreOver(cutoff);
 
@@ -180,10 +183,11 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
             System.out.println();
         }
 
+        return models;
 
     }
 
-    public void usersThatWatchedAllPictures() {
+    public UserModel[] usersThatWatchedAllPictures() {
         UserModel[] models = dbHandler.usersThatWatchedAllPictures();
 
         for (int i = 0; i < models.length; i++) {
@@ -206,19 +210,21 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
 
             System.out.println();
         }
+        return models;
 
     }
 
-    public void genreWithLowestAvgLength() {
+    public String[] genreWithLowestAvgLength() {
         String[] models = dbHandler.genreWithLowestAvgLength();
 
         for (int i = 0; i < models.length; i++) {
             System.out.println(models[i]);
         }
+        return models;
 
     }
 
-    public void showPicture() {
+    public PictureModel[] showPicture() {
         PictureModel[] models = dbHandler.getPictureInfo();
 
         for (int i = 0; i < models.length; i++) {
@@ -238,9 +244,10 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
 
             System.out.println();
         }
+        return models;
     }
 
-    public void showUser() {
+    public UserModel[] showUser() {
         UserModel[] models = dbHandler.getUserInfo();
 
         for (int i = 0; i < models.length; i++) {
@@ -260,6 +267,7 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
 
             System.out.println();
         }
+        return models;
     }
 
     /**

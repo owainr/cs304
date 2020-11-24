@@ -1,6 +1,9 @@
 package ca.ubc.cs304.delegates;
 
+import ca.ubc.cs304.model.GenreAvgLengthModel;
+import ca.ubc.cs304.model.GenreCountModel;
 import ca.ubc.cs304.model.PictureModel;
+import ca.ubc.cs304.model.UserModel;
 
 import java.sql.Date;
 
@@ -19,15 +22,16 @@ public interface TerminalTransactionsDelegate {
 
     public void deletePicture(String title, Date releaseDate);
     public void insertPicture(PictureModel model);
-    public void showPicture();
+    public PictureModel[] showPicture();
+    public UserModel[] showUser();
     public void updatePictureDirector(String title, Date releaseDate, String director);
-    public void selectUsersFavGenre(String favGenre);
-    public void projectPictureSeriesID();
-    public void allUsersThatWatchedAPicture(String title, Date releaseDate);
-    public void avgLengthByGenre();
-    public void numPicturesByGenreOver(int cutoff);
-    public void usersThatWatchedAllPictures();
-    public void genreWithLowestAvgLength();
+    public UserModel[] selectUsersFavGenre(String favGenre);
+    public String[] projectPictureSeriesID();
+    public UserModel[] allUsersThatWatchedAPicture(String title, Date releaseDate);
+    public GenreAvgLengthModel[] avgLengthByGenre();
+    public GenreCountModel[] numPicturesByGenreOver(int cutoff);
+    public UserModel[] usersThatWatchedAllPictures();
+    public String[] genreWithLowestAvgLength();
 
     public void terminalTransactionsFinished();
 }
