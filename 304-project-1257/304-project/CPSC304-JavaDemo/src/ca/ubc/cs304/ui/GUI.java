@@ -239,7 +239,8 @@ public class GUI extends JFrame implements ActionListener, ItemListener, FocusLi
 
 		JPanel buttonPanel = new JPanel();
 		printButtonsDisplay = new JLabel();
-		printButtonsDisplay.setHorizontalAlignment(JLabel.CENTER);
+		printButtonsDisplay.setHorizontalAlignment(JLabel.RIGHT);
+		printButtonsDisplay.setVerticalAlignment(JLabel.TOP);
 		regularFont = printButtonsDisplay.getFont().deriveFont(Font.PLAIN, 16.0f);
 		italicFont = regularFont.deriveFont(Font.ITALIC);
 
@@ -249,7 +250,12 @@ public class GUI extends JFrame implements ActionListener, ItemListener, FocusLi
 						"Find the Genre with the Lowest Average Picture Length"));
 		buttonPanel.add(createButtons(buttonLabels));
 
+		buttonPanel.setPreferredSize(new Dimension(100, 200));
+		buttonPanel.setVisible(true);
+
 		UI.add(buttonPanel);
+
+		UI.setVisible(true);
 
 		return UI;
 	}
@@ -509,14 +515,18 @@ public class GUI extends JFrame implements ActionListener, ItemListener, FocusLi
 
 		String[] labelStrings = labels.toArray(new String[0]);
 
+		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
 		for (int i=0; i<labelStrings.length; i++) {
 			JButton button = new JButton(labelStrings[i]);
 			button.addActionListener(this);
 			button.setPreferredSize(new Dimension(25, 25));
+			button.setVisible(true);
 			panel.add(button);
 		}
 
 		panel.setBorder(BorderFactory.createEmptyBorder(0, 0, GAP - 5, GAP - 5));
+		panel.setVisible(true);
 		return panel;
 
 	}
