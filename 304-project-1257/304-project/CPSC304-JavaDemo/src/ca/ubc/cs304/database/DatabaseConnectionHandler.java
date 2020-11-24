@@ -436,7 +436,6 @@ public class DatabaseConnectionHandler {
     }
 
     public void databaseSetup() {
-        dropBranchTableIfExists();
 
         try {
             Statement stmt = connection.createStatement();
