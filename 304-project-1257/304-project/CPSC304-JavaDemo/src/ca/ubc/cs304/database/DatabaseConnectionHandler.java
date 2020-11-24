@@ -127,6 +127,42 @@ public class DatabaseConnectionHandler {
         return result.toArray(new PictureModel[result.size()]);
     }
 
+    public UserModel[] getUserInfo() {
+        ArrayList<UserModel> result = new ArrayList<UserModel>();
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM user");
+
+//    		// get info on ResultSet
+//    		ResultSetMetaData rsmd = rs.getMetaData();
+//
+//    		System.out.println(" ");
+//
+//    		// display column names;
+//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
+//    			// get column name and print it
+//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+//    		}
+
+            while(rs.next()) {
+                UserModel model = new UserModel(rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("favGenreCategory"),
+                        rs.getInt("watchlistID"),
+                        rs.getInt("historyID"));
+                result.add(model);
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new UserModel[result.size()]);
+    }
+
     public void updatePictureDirector(String title, Date releaseDate, String director) {
         try {
             PreparedStatement ps = connection.prepareStatement("UPDATE picture SET director = ? WHERE title = ? AND releaseDate = ?");

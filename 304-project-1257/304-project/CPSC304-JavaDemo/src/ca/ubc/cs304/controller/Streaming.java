@@ -240,6 +240,28 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
         }
     }
 
+    public void showUser() {
+        UserModel[] models = dbHandler.getUserInfo();
+
+        for (int i = 0; i < models.length; i++) {
+            UserModel model = models[i];
+
+            // simplified output formatting; truncation may occur
+            System.out.printf("%-10.10s", model.getUsername());
+            System.out.printf("%-20.20s", model.getEmail());
+            System.out.printf("%-20.20s", model.getFavGenreCategory());
+
+            System.out.printf("%-15.15s", model.getWatchlistID());
+            if (model.getWatchlistID() == 0) {
+                System.out.printf("%-15.15s", " ");
+            } else {
+                System.out.printf("%-15.15s", model.getHistoryID());
+            }
+
+            System.out.println();
+        }
+    }
+
     /**
      * TerminalTransactionsDelegate Implementation
      *
