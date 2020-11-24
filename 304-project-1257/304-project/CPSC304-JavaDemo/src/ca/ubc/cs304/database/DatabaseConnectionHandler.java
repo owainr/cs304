@@ -465,17 +465,29 @@ public class DatabaseConnectionHandler {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
 
-        PictureModel branch1 = new PictureModel("Twilight", new Date(2008, 10, 21), 126, "Catherine Hardwicke", 6, "Romance");
-        insertPicture(branch1);
+        PictureModel twilight = new PictureModel("Twilight", new Date(2008, 10, 21), 126, "Catherine Hardwicke", 6, "Romance");
+        insertPicture(twilight);
 
-        PictureModel branch2 = new PictureModel("Gone Girl", new Date(2014, 10, 23), 149, "David Fincher", 0, "Thriller");
-        insertPicture(branch2);
+        PictureModel goneGirl = new PictureModel("Gone Girl", new Date(2014, 10, 23), 149, "David Fincher", 0, "Thriller");
+        insertPicture(goneGirl);
+
+        PictureModel fault = new PictureModel("The Fault in Our Stars", new Date(2014,06,06), 133, "Josh Boone", 0, "Romance");
+        insertPicture(fault);
+
+        PictureModel babyDriver = new PictureModel("Baby Driver", new Date(2017,06,28), 115, "Edgar Wright", 0,"Action");
+        insertPicture(babyDriver);
+
+        PictureModel shutterIsland = new PictureModel("Shutter Island", new Date(2010,02,19), 138, "Martin Scorsese", 0, "Thriller");
+        insertPicture(shutterIsland);
+
 
         UserModel jack = new UserModel("Jack", "a@b.ca", "Documentary", 1, 1);
         insertUser(jack);
 
         UserModel dad = new UserModel("Dad", "b@c.ca", "Thriller", 2, 2);
         insertUser(dad);
+
+        UserModel patrice = new UserModel("Patrice", "c@d.ca", "Romance", 3, 3);
     }
 
     private void insertUser(UserModel model) {
