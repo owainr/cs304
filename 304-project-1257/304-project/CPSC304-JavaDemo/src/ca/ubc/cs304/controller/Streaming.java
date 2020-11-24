@@ -210,6 +210,11 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
     }
 
     public void genreWithLowestAvgLength() {
+        String[] models = dbHandler.genreWithLowestAvgLength();
+
+        for (int i = 0; i < models.length; i++) {
+            System.out.println(models[i]);
+        }
 
     }
 

@@ -335,12 +335,12 @@ public class DatabaseConnectionHandler {
 
     }
 
-    public PictureModel[] genreWithLowestAvgLength() {
-        ArrayList<PictureModel> result = new ArrayList<PictureModel>();
+    public String[] genreWithLowestAvgLength() {
+        ArrayList<String> result = new ArrayList<String>();
 
         try {
             Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM picture p" +
+            ResultSet rs = stmt.executeQuery("SELECT p.genre FROM picture p" +
                     "WHERE AVG(p.length) <= ALL" +
                     "(SELECT AVG(p2.length) FROM picture p2" +
                     "GROUP BY genre)");
@@ -357,11 +357,7 @@ public class DatabaseConnectionHandler {
 //    		}
 
             while(rs.next()) {
-                PictureModel model = new PictureModel(rs.getString("pictureTitle"),
-                        rs.getDate("releaseDate"),
-                        rs.getInt("lenght"),
-                        rs.getString("director"),
-                        rs.getInt("seriesID"));
+                String model = rs.getString("genre");
                 result.add(model);
             }
 
@@ -371,7 +367,7 @@ public class DatabaseConnectionHandler {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
 
-        return result.toArray(new PictureModel[result.size()]);
+        return result.toArray(new String[result.size()]);
 
     }
 
