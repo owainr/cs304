@@ -58,7 +58,7 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
     /**
      * TermainalTransactionsDelegate Implementation
      *
-     * Insert a branch with the given info
+     * Insert a picture with the given info
      */
     public void insertPicture(PictureModel model) {
         dbHandler.insertPicture(model);
@@ -67,7 +67,7 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
     /**
      * TermainalTransactionsDelegate Implementation
      *
-     * Delete branch with given branch ID.
+     * Delete picture with given title and releaseDate.
      */
     public void deletePicture(String title, Date releaseDate) {
         dbHandler.deletePicture(title, releaseDate);
@@ -76,18 +76,13 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
     /**
      * TermainalTransactionsDelegate Implementation
      *
-     * Update the branch name for a specific ID
+     * Update the picture director for a specific title and releaseDate
      */
 
     public void updatePictureDirector(String title, Date releaseDate, String director) {
         dbHandler.updatePictureDirector(title, releaseDate, director);
     }
 
-    /**
-     * TermainalTransactionsDelegate Implementation
-     *
-     * Displays information about varies bank branches.
-     */
 
     public UserModel[] selectUsersFavGenre(String favGenre) {
         UserModel[] models = dbHandler.selectUsersFavGenre(favGenre);
@@ -283,12 +278,6 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
         System.exit(0);
     }
 
-    /**
-     * TerminalTransactionsDelegate Implementation
-     *
-     * The TerminalTransaction instance tells us that the user is fine with dropping any existing table
-     * called branch and creating a new one for this project to use
-     */
     public void databaseSetup() {
         dbHandler.databaseSetup();;
 

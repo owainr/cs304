@@ -508,7 +508,7 @@ public class DatabaseConnectionHandler {
         }
     }
 
-    private void dropBranchTableIfExists() {
+   /* private void dropBranchTableIfExists() {
         try {
             Statement stmt = connection.createStatement();
             ResultSet rs = stmt.executeQuery("select table_name from user_tables");
@@ -525,7 +525,7 @@ public class DatabaseConnectionHandler {
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
-    }
+    }*/
 
     public String[] projectPictureSeriesID() {
         ArrayList<String> result = new ArrayList<>();
