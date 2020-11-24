@@ -1,10 +1,12 @@
-CREATE TABLE branch ( 
-	branch_id integer not null PRIMARY KEY,
-	branch_name varchar2(20) not null,
-	branch_addr varchar2(50),
-	branch_city varchar2(20) not null,
-	branch_phone integer 
+
+CREATE TABLE picture (
+	pictureTitle char(50) not null PRIMARY KEY,
+	releaseDate date not null PRIMARY KEY,
+	length real not null,
+	director: char(40) not null,
+	seriesID int
 );
+
 
 CREATE TABLE user (
 	username char(20) not null PRIMARY KEY,
@@ -14,8 +16,16 @@ CREATE TABLE user (
 	historyID int UNIQUE not null,
 );
 
+CREATE TABLE userWatches (
+	username char(20) not null PRIMARY KEY,
+	email char(40) not null PRIMARY KEY,
+	pictureTitle char(50) not null PRIMARY KEY,
+	releaseDate date not null PRIMARY KEY,
+);
 
-INSERT INTO branch VALUES (1, "ABC", "123 Charming Ave", "Vancouver", "6041234567");
-INSERT INTO branch VALUES (2, "DEF", "123 Coco Ave", "Vancouver", "6044567890");
+
+
+INSERT INTO picture VALUES ("Twilight", 126, "Catherine Hardwicke", 6, "Romance");
+INSERT INTO picture VALUES ("Gone Girl", 149, "David Fincher", null, "Thriller");
 INSERT INTO user VALUES("Jack", "a@b.ca", "Documentary", 1, 1);
 INSERT INTO user VALUES("Dad", "b@c.ca", "Thriller", 2, 2);

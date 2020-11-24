@@ -70,7 +70,7 @@ public class DatabaseConnectionHandler {
 
     public void insertPicture(PictureModel model) {
         try {
-            PreparedStatement ps = connection.prepareStatement("INSERT INTO picture VALUES (?,?,?,?,?)");
+            PreparedStatement ps = connection.prepareStatement("INSERT INTO picture VALUES (?,?,?,?,?,?)");
             ps.setInt(1, model.getLength());
             ps.setString(2, model.getDirector());
             ps.setString(3, model.getTitle());
@@ -80,6 +80,7 @@ public class DatabaseConnectionHandler {
             } else {
                 ps.setInt(5, model.getSeriesID());
             }
+            ps.setString(6, model.getGenre());
 
             ps.executeUpdate();
             connection.commit();
@@ -114,7 +115,7 @@ public class DatabaseConnectionHandler {
                         rs.getDate("releaseDate"),
                         rs.getInt("lenght"),
                         rs.getString("director"),
-                        rs.getInt("seriesID"));
+                        rs.getInt("seriesID"), rs.getString("genre"));
                 result.add(model);
             }
 
@@ -443,7 +444,8 @@ public class DatabaseConnectionHandler {
                     " releaseDate date PRIMARY KEY," +
                     " length real NOT NULL," +
                     " director: char(40)," +
-                    " seriesID int)");
+                    " seriesID int)," +
+                    "genre: char(40)");
             stmt.close();
         } catch (SQLException e) {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
@@ -463,10 +465,10 @@ public class DatabaseConnectionHandler {
             System.out.println(EXCEPTION_TAG + " " + e.getMessage());
         }
 
-        PictureModel branch1 = new PictureModel("Twilight", new Date(2008, 10, 21), 126, "Catherine Hardwicke", 6);
+        PictureModel branch1 = new PictureModel("Twilight", new Date(2008, 10, 21), 126, "Catherine Hardwicke", 6, "Romance");
         insertPicture(branch1);
 
-        PictureModel branch2 = new PictureModel("Gone Girl", new Date(2014, 10, 23), 149, "David Fincher", 0);
+        PictureModel branch2 = new PictureModel("Gone Girl", new Date(2014, 10, 23), 149, "David Fincher", 0, "Thriller");
         insertPicture(branch2);
 
         UserModel jack = new UserModel("Jack", "a@b.ca", "Documentary", 1, 1);

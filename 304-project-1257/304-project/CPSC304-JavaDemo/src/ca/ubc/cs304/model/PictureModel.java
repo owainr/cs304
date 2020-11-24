@@ -12,13 +12,15 @@ public class PictureModel {
 	private int length;
 	private String director;
     private int seriesID;
+    private String genre;
 	
-	public PictureModel(String title, Date releaseDate, int length, String director, int seriesID) {
+	public PictureModel(String title, Date releaseDate, int length, String director, int seriesID, String genre) {
 		this.title = title;
 		this.releaseDate = releaseDate;
 		this.length = length;
 		this.director = director;
         this.seriesID = seriesID;
+        this.genre = genre;
 	}
 
 	public String getTitle() {
@@ -40,4 +42,8 @@ public class PictureModel {
     public int getSeriesID() {
 		return seriesID;
 	}
+
+    public String getGenre() {
+        return genre;
+    }
 }

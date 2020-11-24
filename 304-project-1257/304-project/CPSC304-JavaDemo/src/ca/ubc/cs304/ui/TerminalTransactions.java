@@ -162,12 +162,18 @@ public class TerminalTransactions {
 			System.out.print("Please enter the branch seriesid you wish to insert: ");
 			seriesID = readInteger(true);
 		}
+
+        String genre = null;
+        while (genre == null || genre.length() <= 0) {
+            System.out.print("Please enter the genre you wish to insert: ");
+            genre = readLine().trim();
+        }
 		
 		PictureModel model = new PictureModel(title,
 											date,
 											length,
 											director,
-											seriesID);
+											seriesID, genre);
 		delegate.insertPicture(model);
 	}
 	
