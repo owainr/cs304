@@ -23,8 +23,11 @@ public interface TerminalTransactionsDelegate {
     public void updatePictureDirector(String title, Date releaseDate, String director);
     public void selectUsersFavGenre(String favGenre);
     public void projectPictureSeriesID();
-    public void allUsersThatWatchedMovie(String title, Date releaseDate);
+    public void allUsersThatWatchedAPicture(String title, Date releaseDate);
     public void avgLengthByGenre();
+    public void numPicturesByGenreOver(int cutoff);
+    public void usersThatWatchedAllPictures();
+    public void genreWithLowestAvgLength();
 
     public void terminalTransactionsFinished();
 }

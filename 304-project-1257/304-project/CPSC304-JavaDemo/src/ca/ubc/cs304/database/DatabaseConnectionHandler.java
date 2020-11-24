@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 import ca.ubc.cs304.model.GenreAvgLengthModel;
+import ca.ubc.cs304.model.GenreCountModel;
 import ca.ubc.cs304.model.PictureModel;
 import ca.ubc.cs304.model.UserModel;
 
@@ -184,7 +185,7 @@ public class DatabaseConnectionHandler {
         return result.toArray(new UserModel[result.size()]);
     }
 
-    public UserModel[] allUsersThatWatchedMovie(String title, Date releaseDate) {
+    public UserModel[] allUsersThatWatchedAPicture(String title, Date releaseDate) {
         ArrayList<UserModel> result = new ArrayList<UserModel>();
 
         try {
@@ -258,6 +259,119 @@ public class DatabaseConnectionHandler {
         }
 
         return result.toArray(new GenreAvgLengthModel[result.size()]);
+
+    }
+
+    public GenreCountModel[] numPicturesByGenreOver(int cutoff) {
+        ArrayList<GenreCountModel> result = new ArrayList<GenreCountModel>();
+
+        try {
+            PreparedStatement ps = connection.prepareStatement("SELECT genre, COUNT(*) FROM picture GROUP BY genre HAVING COUNT(*) > ?");
+            ps.setInt(1,cutoff);
+            ResultSet rs = ps.executeQuery();
+//    		// get info on ResultSet
+//    		ResultSetMetaData rsmd = rs.getMetaData();
+//
+//    		System.out.println(" ");
+//
+//    		// display column names;
+//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
+//    			// get column name and print it
+//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+//    		}
+
+            while(rs.next()) {
+                GenreCountModel model = new GenreCountModel(rs.getString("genre"),
+                        rs.getInt("COUNT"));
+                result.add(model);
+            }
+
+            rs.close();
+            rs.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new GenreCountModel[result.size()]);
+    }
+
+    public UserModel[] usersThatWatchedAllPictures() {
+        ArrayList<UserModel> result = new ArrayList<UserModel>();
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM user WHERE NOT EXISTS" +
+                    "((SELECT * FROM picture p) EXCEPT" +
+                    "(SELECT * FROM userWatches uw WHERE p.title = uw.title AND" +
+                    "p.releaseDate = uw.releaseDate))");
+
+//    		// get info on ResultSet
+//    		ResultSetMetaData rsmd = rs.getMetaData();
+//
+//    		System.out.println(" ");
+//
+//    		// display column names;
+//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
+//    			// get column name and print it
+//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+//    		}
+
+            while(rs.next()) {
+                UserModel model = new UserModel(rs.getString("username"),
+                        rs.getString("email"),
+                        rs.getString("favGenreCategory"),
+                        rs.getInt("watchlistID"),
+                        rs.getInt("historyID"));
+                result.add(model);
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new UserModel[result.size()]);
+
+    }
+
+    public PictureModel[] genreWithLowestAvgLength() {
+        ArrayList<PictureModel> result = new ArrayList<PictureModel>();
+
+        try {
+            Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT * FROM picture p" +
+                    "WHERE AVG(p.length) <= ALL" +
+                    "(SELECT AVG(p2.length) FROM picture p2" +
+                    "GROUP BY genre)");
+
+//    		// get info on ResultSet
+//    		ResultSetMetaData rsmd = rs.getMetaData();
+//
+//    		System.out.println(" ");
+//
+//    		// display column names;
+//    		for (int i = 0; i < rsmd.getColumnCount(); i++) {
+//    			// get column name and print it
+//    			System.out.printf("%-15s", rsmd.getColumnName(i + 1));
+//    		}
+
+            while(rs.next()) {
+                PictureModel model = new PictureModel(rs.getString("pictureTitle"),
+                        rs.getDate("releaseDate"),
+                        rs.getInt("lenght"),
+                        rs.getString("director"),
+                        rs.getInt("seriesID"));
+                result.add(model);
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (SQLException e) {
+            System.out.println(EXCEPTION_TAG + " " + e.getMessage());
+        }
+
+        return result.toArray(new PictureModel[result.size()]);
 
     }
 

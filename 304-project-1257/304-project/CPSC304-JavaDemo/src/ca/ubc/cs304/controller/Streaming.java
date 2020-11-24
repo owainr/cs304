@@ -4,6 +4,7 @@ import ca.ubc.cs304.database.DatabaseConnectionHandler;
 import ca.ubc.cs304.delegates.LoginWindowDelegate;
 import ca.ubc.cs304.delegates.TerminalTransactionsDelegate;
 import ca.ubc.cs304.model.GenreAvgLengthModel;
+import ca.ubc.cs304.model.GenreCountModel;
 import ca.ubc.cs304.model.PictureModel;
 import ca.ubc.cs304.model.UserModel;
 import ca.ubc.cs304.ui.LoginWindow;
@@ -122,8 +123,8 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
         }
     }
 
-    public void allUsersThatWatchedMovie(String title, Date releaseDate) {
-        UserModel[] models = dbHandler.allUsersThatWatchedMovie(title,releaseDate);
+    public void allUsersThatWatchedAPicture(String title, Date releaseDate) {
+        UserModel[] models = dbHandler.allUsersThatWatchedAPicture(title,releaseDate);
 
         for (int i = 0; i < models.length; i++) {
             UserModel model = models[i];
@@ -162,6 +163,53 @@ public class Streaming implements LoginWindowDelegate, TerminalTransactionsDeleg
 
             System.out.println();
         }
+
+    }
+
+    public void numPicturesByGenreOver(int cutoff) {
+
+        GenreCountModel[] models = dbHandler.numPicturesByGenreOver(cutoff);
+
+        for (int i = 0; i < models.length; i++) {
+            GenreCountModel model = models[i];
+
+            // simplified output formatting; truncation may occur
+            System.out.printf("%-10.10s", model.getGenre());
+            System.out.printf("%-20.20s", model.getCount());
+
+            System.out.println();
+        }
+
+
+    }
+
+    public void usersThatWatchedAllPictures() {
+        UserModel[] models = dbHandler.usersThatWatchedAllPictures();
+
+        for (int i = 0; i < models.length; i++) {
+            UserModel model = models[i];
+
+            // simplified output formatting; truncation may occur
+            System.out.printf("%-10.10s", model.getUsername());
+            System.out.printf("%-20.20s", model.getEmail());
+            if (model.getFavGenreCategory() == null) {
+                System.out.printf("%-20.20s", " ");
+            } else {
+                System.out.printf("%-20.20s", model.getFavGenreCategory());
+            }
+            System.out.printf("%-15.15s", model.getWatchlistID());
+            if (model.getHistoryID() == 0) {
+                System.out.printf("%-15.15s", " ");
+            } else {
+                System.out.printf("%-15.15s", model.getHistoryID());
+            }
+
+            System.out.println();
+        }
+
+    }
+
+    public void genreWithLowestAvgLength() {
 
     }
 
